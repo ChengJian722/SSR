@@ -31,14 +31,20 @@ export const mutations={
     
     },
     //清除用户数据
-    cleanUserInfo(state,info){
-        // console.log(state)
-        if(process.browser){
-        // console.log(process.browser)
+    // cleanUserInfo(state,info){
+    //     // console.log(state)
+    //     if(process.browser){
+    //     // console.log(process.browser)
 
-            localStorage.removeItem("userInfo")
+    //         localStorage.removeItem("userInfo")
+    //     }
+    //     state.userInfo={};
+    // }
+    chearUserInfo(state){
+        state.userInfo={
+            token:'',
+            user:{}
         }
-        state.userInfo={};
     }
 
 }
