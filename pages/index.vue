@@ -3,20 +3,17 @@
     <!-- 幻灯片 -->
     <!-- interval: 间隔时间
     arrow：出现箭头-->
-      <el-carousel 
-        :interval="5000" 
-        arrow="always">
-            <el-carousel-item 
-            v-for="(item, index) in banners" 
-            :key="index">
-                <div class="banner-image" 
-                :style="`
+    <el-carousel :interval="5000" arrow="always">
+      <el-carousel-item v-for="(item, index) in banners" :key="index">
+        <div
+          class="banner-image"
+          :style="`
                 background:url(${item.url}) center center no-repeat;
                 background-size:contain contain;
-                `">
-                </div>
-            </el-carousel-item>
-        </el-carousel>
+                `"
+        ></div>
+      </el-carousel-item>
+    </el-carousel>
 
     <!-- 搜索框，真好看 -->
     <div class="banner-content">
@@ -79,6 +76,23 @@ export default {
       }
 
       this.current = index;
+    },
+    // 切换tab栏时候触发
+    handleOption(index) {  
+      // 设置当前tab
+      this.currentOption = index;
+
+      // 如果切换的机票tab，那么直接跳转到机票首页
+      const item = this.options[index];
+      if (item.name === "机票") {
+        return this.$router.push(item.pageUrl);
+      }
+    },
+    // 搜索时候触发
+    handleSearch() {
+      const item = this.options[this.currentOption];
+      // 跳转时候给对应的页面url加上搜索内容参数
+      this.$router.push(item.pageUrl + this.searchValue);
     }
   },
   //生命周期hook函数
