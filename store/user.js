@@ -26,7 +26,7 @@ export const mutations={
     //state就是上面的state，这个参数是固定默认的
     //data使用调用该方法的时候传入的数据
     setUserInfo(state,data){
-        console.log(data)
+        // console.log(data)
         state.userInfo=data;
     
     },

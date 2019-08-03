@@ -60,7 +60,7 @@ export default {
     //  用户退出
      const commit=this.$store.commit;
      console.log(commit)/
-     commit("user/cleanUserInfo");
+     commit("user/chearUserInfo");
      this.$message({
          message:'退出成功',
          type:'success'

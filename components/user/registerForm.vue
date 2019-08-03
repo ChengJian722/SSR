@@ -77,7 +77,7 @@ export default {
           tel: this.form.username
         }
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         const code = res.data.code;
         // console.log(code)
         this.$alert(`模拟手机验证码为：${code}`, "提示", {
