@@ -88,7 +88,7 @@ export default {
 
     // 注册
     handleRegSubmit() {
-      console.log(this.form);
+      // console.log(this.form);
       this.$refs.form.validate(valid => {
         if (valid) {
            // ES6的标准语法，解构出特定的属性后，剩余的属性可以用... +变量名访问

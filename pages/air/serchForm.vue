@@ -105,7 +105,7 @@ export default {
         data.forEach(v => {
           v.value = v.name.replace("市", "");
           serchArr.push(v);
-        //   console.log(v);
+          //   console.log(v);
         });
         //设置第一个为选中的默认值
         // this.form.departCity=serchArr[0].value;
@@ -135,7 +135,7 @@ export default {
         data.forEach(v => {
           v.value = v.name.replace("市", "");
           serchArr.push(v);
-        //   console.log(v);
+          //   console.log(v);
         });
         //设置第一个为选中的默认值
         // this.form.departCity=serchArr[0].value;
@@ -155,56 +155,70 @@ export default {
     // 目标城市下拉选择时触发
     handleDestSelect(item) {
       //赋值给到达城市
-    //   console.log(item.value);
+      //   console.log(item.value);
       this.form.departCity = item.value;
-    //   console.log(this.form.departCity);
+      //   console.log(this.form.departCity);
       //赋值给到达城市的代码
       this.form.departCode = item.sort;
     },
 
     // 确认选择日期时触发
     handleDate(value) {
-        this.form.departDate=moment(value).format("YYYY-MM-DD")
+      this.form.departDate = moment(value).format("YYYY-MM-DD");
     },
 
     // 触发和目标城市切换时触发
     handleReverse() {
-        //交换出发地和到达地只要换它们的城市名和城市代码
-        const {departCity,departCode,destCity,destCode}=this.form;
+      //交换出发地和到达地只要换它们的城市名和城市代码
+      const { departCity, departCode, destCity, destCode } = this.form;
 
-        this.form.departCity=destCity;
-        this.form.departCode=destCode;
+      this.form.departCity = destCity;
+      this.form.departCode = destCode;
 
-        this.form.destCity=departCity;
-        this.form.deatCode=departCode;
+      this.form.destCity = departCity;
+      this.form.deatCode = departCode;
     },
 
     // 提交表单是触发
     handleSubmit() {
-        //判断
-        if(!this.form.departCity){
-            this.$alert("出发地址不能为空","提示",{
-                type:'warning'
-            })
-            return
-        }
-        if(!this.form.departCity){
-            this.$alert("到达地址不能为空","提示",{
-                type:'warning'
-            })
-            return
-        }
-        if(!this.form.departCity){
-            this.$alert("出发时间不能为空","提示",{
-                type:'warning'
-            })
-            return
-        }
-        //跳转的机票列表页
-        this.$router.push({
-            path:'/air/flights',
-            query:this.form,
-        })
+      //判断
+      if (!this.form.departCity) {
+        this.$alert("出发地址不能为空", "提示", {
+          type: "warning"
+        });
+        return;
+      }
+      if (!this.form.departCity) {
+        this.$alert("到达地址不能为空", "提示", {
+          type: "warning"
+        });
+        return;
+      }
+      if (!this.form.departCity) {
+        this.$alert("出发时间不能为空", "提示", {
+          type: "warning"
+        });
+        return;
+      }
+
+      //跳转的机票列表页
+      this.$router.push({
+        path: "/air/flights",
+        query: this.form
+      });
+      // 获取出本地(vuex)的数据
+            const arr = [...this.$store.state.air.history];
+            
+            // 新的记录添加到第一个
+            arr.unshift(this.form);
+
+            // 如果长度大于5，只保留5位
+            if( arr.length > 5  ){
+                arr.length = 5;
+            }
+
+            // 调用vuex的方法保存数据
+            this.$store.commit("air/setHistory" ,arr )
     }
   },
 
